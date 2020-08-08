@@ -8,8 +8,8 @@ public interface AccountInfoDao {
 
 	int saveCustomerInfo(AccountInfo accInfo);
 	int updateCustomerInfo(AccountInfo accInfo);
-	void deleteCustomerInfo(int id);
-	AccountInfo getCustomerById (int id);
+	void deleteCustomerInfo(long customerId);
+	AccountInfo getCustomerById (long customerId);
 	List<AccountInfo> getAllCustomerList();
 	
 }

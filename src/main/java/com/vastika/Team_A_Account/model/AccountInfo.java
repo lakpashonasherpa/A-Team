@@ -9,8 +9,14 @@ public class AccountInfo {
 	private long customerPhoneNumber;
 	private String customerUniqueIdType;
 	private long customerUniqueIdNum;
-	
-	
+	private double initialBalance;
+
+	public double getInitialBalance() {
+		return initialBalance;
+	}
+	public void setInitialBalance(double initialBalance) {
+		this.initialBalance = initialBalance;
+	}
 	public long getCustomerAccountNum() {
 		return customerAccountNum;
 	}

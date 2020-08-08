@@ -4,7 +4,7 @@ package com.vastika.Team_A_Account;
  * Hello world!
  *
  */
-public class App 
+public class BankController 
 {
     public static void main( String[] args )
     {

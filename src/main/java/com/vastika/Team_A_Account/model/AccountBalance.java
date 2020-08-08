@@ -7,6 +7,7 @@ public class AccountBalance {
 	private double deposit; 
 	private double withdrawal;
 	private double accountBalance;
+	
 	public long getTranscationId() {
 		return transcationId;
 	}
