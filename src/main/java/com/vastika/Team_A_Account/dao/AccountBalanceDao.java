@@ -1,21 +1,21 @@
 package com.vastika.Team_A_Account.dao;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.vastika.Team_A_Account.model.AccountBalance;
 
 public interface AccountBalanceDao {
 	
-	void saveAccountInfo(AccountBalance account);
+	int saveBalanceInfo(AccountBalance account);
 	
-	void updateAccountInfo(AccountBalance account);
+	int updateBalanceInfo(AccountBalance account);
 	
-	void deleteAccountInfo(AccountBalance account);
+	void deleteBalanceInfo(AccountBalance account);
 	
-	void getAccountInfoById(int id);
+	AccountBalance getBalanceInfoById(int id);
 	
-	List<AccountBalance>getAllAcInfo=new ArrayList<>();
+	List<AccountBalance>getAllAcInfo();
 	
 
 }
