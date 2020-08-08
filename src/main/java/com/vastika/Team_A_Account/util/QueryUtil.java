@@ -10,10 +10,12 @@ public class QueryUtil {
 	public static final String UPDATE_SQL_CUSTOMER= "update account_info set account_id=?,customer_name=?,customer_address=?, customer_mobileNum=?,customer_unique_id=?,customer_unique_id_number=? ";
 	public static final String LIST_SQL_CUSTOMER= "select * from account_info";
 	public static final String  DELETE_SQL_CUSTOMER= "delete from account_info where account_id=?";
-	public static final String  DELETE_SQL_CUSTOMER_BALANCE= "delete from account_balance where account_id=?";
+	//this is for deleting customer balance with customer account id
+	public static final String  DELETE_SQL_CUSTOMER_BALANCE= "delete from account_balance where account_info_id=?";
 	public static final String GET_BY_ID_SQL_CUSTOMER= "select * from account_info where account_id=?";
 	public static final String Update_SQL_CUSTOMER_BALANCE_BY_ID = "select account_balance from account_balance where  account_info_id=?";
-	public static final String Update_SQL_CUSTOMER_DEPOSIT_BY_ID="select deposit_amount from account_balance where  account_info_id=?";
+	public static final String GET_SQL_CUSTOMER_DEPOSIT_BY_ID="select deposit_amount  from account_balance where  account_info_id=?";
 	public static final String Update_SQL_CUSTOMER_WITHDRAWAL_BY_ID="select withdraw_amount from account_balance where  account_info_id=?";
 	public static final String LIST_SQL_CUSTOMER_BALANCE="select account_info.account_id, account_info.customer_name, account_balance.account_balance, account_balance.deposit_amount, account_balance.withdraw_amount from account_info inner join account_balance on account_info.account_id = account_balanceaccount_info_id where account_info.account_id=?";
+public static final String INSERT_SQL_CUSTOMER_DEPOSIT_BY_ID ="update account_balance set deposit_amount=? , account_balance =? where account_info_id=?";
 }

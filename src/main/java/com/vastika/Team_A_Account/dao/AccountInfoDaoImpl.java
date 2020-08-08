@@ -64,7 +64,7 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 
 	@Override
 	public void deleteCustomerInfo(long customerId) {
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 		try(
 				Connection con = DBUtil.getConnection();
 				PreparedStatement ps1 = con.prepareStatement(QueryUtil.DELETE_SQL_CUSTOMER);
@@ -143,6 +143,7 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 		return accountInfoList;
 	}
 
+	
 	
 
 }

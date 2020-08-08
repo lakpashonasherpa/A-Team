@@ -15,27 +15,34 @@ import com.vastika.Team_A_Account.util.QueryUtil;
 public class AccountBalanceDaoImpl implements AccountBalanceDao {
 
 	@Override
-	public double displayAccountInfo(long customerAccountNum) {
+	public void displayAccountInfo(long customerAccountNum) {
 		
-		AccountInfo accInfo = new AccountInfo();
+		AccountBalance accBal = new AccountBalance();
 		
-		double balance= accInfo.getInitialBalance();
+		//double balance= accBal.getInitialBalance();
 		try(
 				Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.Update_SQL_CUSTOMER_BALANCE_BY_ID)
 				){
 			ps.setLong(1, customerAccountNum);
-			balance = ps.executeUpdate();
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				accBal.setTranscationId(rs.getLong("account_transaction_id"));
+				accBal.setAccountBalance(rs.getDouble("account_balance"));
+				accBal.setDeposit(rs.getDouble("deposit_amount"));
+				accBal.setWithdrawal(rs.getDouble("withdraw_amount"));
+			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
 		} 
-		return balance;
+		//return balance;
 	}
 
 	@Override
-	public double depositBalance(long customerAccountNum, double amount) {
+	public void depositBalance(long customerAccountNum, double amount) {
 		AccountInfo accInfo = new AccountInfo();
 		
 		double balance= accInfo.getInitialBalance();
@@ -44,21 +51,27 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 		
 		try(
 				Connection con = DBUtil.getConnection();
-				PreparedStatement ps = con.prepareStatement(QueryUtil.Update_SQL_CUSTOMER_DEPOSIT_BY_ID)
+				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_DEPOSIT_BY_ID);
+				PreparedStatement ps1 = con.prepareStatement(QueryUtil.GET_SQL_CUSTOMER_DEPOSIT_BY_ID);
+				
 				){
 			
 			ps.setLong(1, customerAccountNum);
-			balance = ps.executeUpdate();
+			ps.setDouble(2, amount);
+			ps.setDouble(3, balance);
+			ps.executeUpdate();
+			ps1.setLong(1, customerAccountNum);
+			 ps1.executeQuery();
 			
 		} catch (ClassNotFoundException | SQLException e) {
 		
 			e.printStackTrace();
 		}
-		return balance;
+		
 	}
 
 	@Override
-	public double withdrawalBalance(long customerAccountNum, double amount) {
+	public void withdrawalBalance(long customerAccountNum, double amount) {
 		AccountInfo accInfo = new AccountInfo();
 		double balance = accInfo.getInitialBalance();
 		balance = balance-amount;
@@ -75,7 +88,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		return balance;
+	//	return balance;
 	}
 
 	@Override
@@ -91,8 +104,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 				){
 			
 			ResultSet rs = ps.executeQuery();
-			//select account_info.account_id, account_info.customer_name, account_balance.account_balance, 
-			//account_balance.deposit_amount, account_balance.withdraw_amount
+			
 			while(rs.next()) {
 				AccountInfo accInfo = new AccountInfo();
 				accInfo.setCustomerAccountNum(rs.getLong("account_id"));
@@ -106,7 +118,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 				accbalList.add(accBal);
 				
 			}
-			//totalList.addAll(accbalList);
+		//	totalList.addAll(accbalList);
 			
 		} catch (ClassNotFoundException | SQLException e) {
 		
