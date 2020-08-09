@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.vastika.Team_A_Account.model.AccountBalance;
 import com.vastika.Team_A_Account.model.AccountInfo;
-import com.vastika.Team_A_Account.model.Report;
+import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
 import com.vastika.Team_A_Account.util.DBUtil;
 import com.vastika.Team_A_Account.util.QueryUtil;
 
@@ -53,7 +53,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 		
 		try(
 				Connection con = DBUtil.getConnection();
-				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_DEPOSIT_BY_ID);
+				PreparedStatement ps = con.prepareStatement(QueryUtil.UPDATE_SQL_CUSTOMER_DEPOSIT_BY_ID);
 				//PreparedStatement ps1 = con.prepareStatement(QueryUtil.GET_SQL_CUSTOMER_DEPOSIT_BY_ID);
 				
 				){
@@ -91,9 +91,9 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 	}
 
 	@Override
-	public List<Report> getAllAccountBalancewithCustomerInfo() {
+	public List<AccountInfoBalanceReport> getAllAccountBalancewithCustomerInfo() {
 
-		List<Report> reports = new ArrayList<>();
+		List<AccountInfoBalanceReport> accountInfoBalanceReports = new ArrayList<>();
 		
 		
 		try(
@@ -104,14 +104,14 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Report rep = new Report();
+				AccountInfoBalanceReport rep = new AccountInfoBalanceReport();
 				rep.setCustomerAccountNum(rs.getLong("account_id"));
 				rep.setCustomerName(rs.getString("customer_name"));
 				rep.setInitialBalance(rs.getDouble("total_balance"));
 				rep.setDeposit(rs.getDouble("deposit_amount"));
 				rep.setWithdrawal(rs.getDouble("withdraw_amount"));
 				
-				reports.add(rep);
+				accountInfoBalanceReports.add(rep);
 				
 			}
 		
@@ -120,7 +120,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 		
 			e.printStackTrace();
 		} 
-		return reports;
+		return accountInfoBalanceReports;
 	}
 
 }

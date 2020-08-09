@@ -1,6 +1,6 @@
 package com.vastika.Team_A_Account.model;
 
-public class Report {
+public class AccountInfoBalanceReport {
 	
 	private long customerAccountNum;
 	private String customerName;

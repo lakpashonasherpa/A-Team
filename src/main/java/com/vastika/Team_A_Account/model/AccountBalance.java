@@ -7,6 +7,7 @@ public class AccountBalance {
 	private double deposit; 
 	private double withdrawal;
 	private double accountBalance;
+	private long account_info_id;
 	
 	public long getTranscationId() {
 		return transcationId;
@@ -39,6 +40,12 @@ public class AccountBalance {
 		
 		return accountId;
 		
+	}
+	public long getAccount_info_id() {
+		return account_info_id;
+	}
+	public void setAccount_info_id(long account_info_id) {
+		this.account_info_id = account_info_id;
 	}
 	
 }

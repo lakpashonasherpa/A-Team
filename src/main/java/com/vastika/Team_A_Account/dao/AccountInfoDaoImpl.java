@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.mysql.cj.protocol.Resultset;
+import com.vastika.Team_A_Account.model.AccountBalance;
 import com.vastika.Team_A_Account.model.AccountInfo;
 import com.vastika.Team_A_Account.util.DBUtil;
 import com.vastika.Team_A_Account.util.QueryUtil;
@@ -17,10 +18,13 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 
 	@Override
 	public int saveCustomerInfo(AccountInfo accInfo) {
+		AccountBalance accBal = new AccountBalance();
 		int saved=0;
+		
 		try(
 				Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER);
+				PreparedStatement ps1 = con.prepareStatement(QueryUtil.UPDATE_SQL_CUSTOMER_BALANCE);
 				){
 				ps.setLong(1,accInfo.getCustomerAccountNum());
 				ps.setString(2,accInfo.getCustomerName());
@@ -29,12 +33,36 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 				ps.setString(5, accInfo.getCustomerUniqueIdType());
 				ps.setLong(6, accInfo.getCustomerUniqueIdNum());
 				ps.setDouble(7, accInfo.getInitialBalance());
-				
-				saved =ps.executeUpdate();
+				ps1.setDouble(7, accBal.getAccountBalance());
+				ps1.setLong(1, accBal.getAccount_info_id());
+			saved =ps.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} 
 		return saved;
+	}
+
+	@Override
+	public int saveCustomerBalance(AccountBalance accBal) {
+		int saved=0;
+		AccountInfo accInfo = new AccountInfo();
+		try(
+				Connection con = DBUtil.getConnection();
+				PreparedStatement ps = con.prepareStatement(QueryUtil.UPDATE_SQL_CUSTOMER_BALANCE);
+				
+				){
+				ps.setDouble(1, accBal.setAccountBalance(accInfo.getInitialBalance()));
+				ps.setLong(2, accBal.getAccount_info_id());
+				
+			saved =ps.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		return saved;
+		
+		
+		
 	}
 
 	@Override
@@ -142,6 +170,7 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 		}		
 		return accountInfoList;
 	}
+
 
 	
 	
