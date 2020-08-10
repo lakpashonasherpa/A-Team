@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import com.vastika.Team_A_Account.model.AccountBalance;
 import com.vastika.Team_A_Account.model.AccountInfo;
+import com.vastika.Team_A_Account.service.AccontBalanceService;
 import com.vastika.Team_A_Account.service.AccontBalanceServiceImpl;
 import com.vastika.Team_A_Account.service.AccountInfoService;
 import com.vastika.Team_A_Account.service.AccountInfoServiceImpl;
@@ -16,7 +17,7 @@ public class BankController {
 			try{
 			
 			System.out.println("Please select 1|2 from below option: \n"
-					+ "1. Create|Edit Customer Account | 2. View|Update Customer And Their Balances ");
+					+ "1. Create|Edit Customer Account | 2. View Customer Records| Update Balance: ");
 			int selection = input.nextInt();
 			
 			switch (selection) {
@@ -28,17 +29,19 @@ public class BankController {
 					
 				AccountInfo saveCustomer = getCustomerInfo();
 				accInfoServ.saveCustomerInfo(saveCustomer);
-				
-				
+				System.out.println("*********************************************");
 				System.out.println("Success!!");
 				System.out.println("Data has been saved!!!");
+				break;
 				
 				}else if(selection1==2) {
-					AccountInfo accIn = new AccountInfo();
+					//AccountInfo accIn = new AccountInfo();
 					AccountInfo updateCustomer = getCustomerUpdateInfo();
 					accInfoServ.updateCustomerInfo(updateCustomer);
+					System.out.println("*********************************************");
 					System.out.println("Success!!");
 					System.out.println("Data has been updated!!!");
+					break;
 					
 				}else {
 					System.out.println("Invalid Input!!!\n"
@@ -48,12 +51,42 @@ public class BankController {
 				break;
 			case 2:
 				
-				System.out.println("1.Update Present Customer Info | ");
 				
-				break;
-			
-			case 3:
-				break;
+				System.out.println("View Customer Records| Update Balance: ");
+				System.out.println("*********************************************");
+				System.out.println("1. View current Customer Records | 2. Update Balance");
+				int selection2= input.nextInt();
+				switch (selection2) {
+				case 1:
+					System.out.println("1.View by CustomerID|2.View all records");
+					int selection3 = input.nextInt();
+					if(selection3==1) {
+						//view by customerID
+					}else if(selection3==2) {
+						//view all records
+					}
+					break;
+				case 2:
+					System.out.println("Update Balance");
+					System.out.println("1. Deposit Balance |2.Withdrawal Balance ");
+					int selection4=input.nextInt();
+					if(selection4==1) {
+						//deposit balance
+						DepositBalance();
+						System.out.println("Success!!");
+						System.out.println("Amount has been deposited!!!");
+					}else if (selection4==2) {
+						
+						//withdrawal
+						withdrawalBalance();
+						
+						System.out.println("Success!!");
+						System.out.println("Amount has been withdrawn!!!");
+						//System.out.println("Your current Balnace is");
+						break;
+					}
+					
+				}
 			
 			default:
 				System.out.println("Invalid Input!!!\n"
@@ -85,15 +118,15 @@ public class BankController {
 		String idType = sc.next();
 		System.out.println("Enter document id number: ");
 		long uniqueIdnum = sc.nextLong();
-		System.out.println("Enter initial balance: ");
-		double bal = sc.nextDouble();
+		//System.out.println("Enter initial balance: ");
+		//double bal = sc.nextDouble();
 		
 		accInfoCustomerInfo.setCustomerName(name);
 		accInfoCustomerInfo.setCustomerAddress(address);
 		accInfoCustomerInfo.setCustomerPhoneNumber(phone);
 		accInfoCustomerInfo.setCustomerUniqueIdType(idType);
 		accInfoCustomerInfo.setCustomerUniqueIdNum(uniqueIdnum);
-		//accInfoCustomerInfo.setInitialBalance(300);
+		accInfoCustomerInfo.setInitialBalance(0);
 		
 		
 		}catch (Exception e) {
@@ -143,6 +176,25 @@ public class BankController {
 		}
 		return accInfoCustomerInfo;
 	}
-	
+	public static void withdrawalBalance() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Customer ID Number: ");
+		int customerId=sc.nextInt();
+		System.out.println("Enter balnace to be withdraw: ");
+		double amount = sc.nextDouble();
+		AccontBalanceService accBalServ = new AccontBalanceServiceImpl();
+		accBalServ.withdrawalBalance(customerId,amount);
+		sc.close();
+	}
+	public static void DepositBalance() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Customer ID Number: ");
+		int customerId=sc.nextInt();
+		System.out.println("Enter balnace to be deposit: ");
+		double amount = sc.nextDouble();
+		AccontBalanceService accBalServ = new AccontBalanceServiceImpl();
+		accBalServ.depositBalance(customerId, amount);
+		sc.close();
+	}
 	
 	}

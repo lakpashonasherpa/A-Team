@@ -7,9 +7,9 @@ import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
 
 public abstract interface AccountBalanceDao {
 	//customeraccount_number = account_num
-	void displayAccountInfo(long customerAccountNum, double amount);
-	void depositBalance(long customerAccountNum, double amount);
-	void withdrawalBalance(long customerAccountNum, double amount);
+	void displayAccountInfo(int customerAccountNum, double amount);
+	void depositBalance(int customerAccountNum, double amount);
+	void withdrawalBalance( int customerAccountNum,double amount);
 	List<AccountInfoBalanceReport> getAllAccountBalancewithCustomerInfo();
 	
 	

@@ -22,8 +22,8 @@ public class AccontBalanceServiceImpl implements AccontBalanceService {
 	}
 
 	@Override
-	public void withdrawalBalance(int customerAccountNum, double amount) {
-		accBald.withdrawalBalance(customerAccountNum, amount);
+	public void withdrawalBalance( int customerAccountNum,double amount) {
+		accBald.withdrawalBalance(customerAccountNum,amount);
 		
 	}
 

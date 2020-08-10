@@ -14,9 +14,11 @@ import com.vastika.Team_A_Account.util.DBUtil;
 import com.vastika.Team_A_Account.util.QueryUtil;
 
 public class AccountBalanceDaoImpl implements AccountBalanceDao {
-
+	public static double balance=0;
+	
+	
 	@Override
-	public void displayAccountInfo(long customerAccountNum, double amount) {
+	public void displayAccountInfo(int customerAccountNum, double amount) {
 		
 		AccountInfo accInfo = new AccountInfo();
 		AccountBalance accBal = new AccountBalance();
@@ -27,18 +29,10 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_BALANCE_BY_ID);
 				){
 			ps.setDouble(1, amount);
-			//ps.setLong(2, customerAccountNum);
+			
 			
 			ps.executeUpdate();
-			//ResultSet rs = ps.executeQuery();
-			/*
-			if(rs.next()) {
-				accBal.setTranscationId(rs.getLong("account_transaction_id"));
-				accBal.setAccountBalance(rs.getDouble("account_balance"));
-				accBal.setDeposit(rs.getDouble("deposit_amount"));
-				accBal.setWithdrawal(rs.getDouble("withdraw_amount"));
-			}
-			*/
+		
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			
@@ -48,11 +42,11 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 	}
 
 	@Override
-	public void depositBalance(long customerAccountNum, double amount) {
-		//int updated =0;
+	public void depositBalance(int customerAccountNum, double amount) {
+		double balance =0;
 		AccountInfo accInfo = new AccountInfo();
 		
-		double balance= accInfo.getInitialBalance();
+		//double balance= accInfo.getInitialBalance();
 		
 		balance = balance+amount;
 		
@@ -67,6 +61,8 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 			ps.setDouble(2, balance);
 			ps.setLong(3, customerAccountNum);
 			
+			ps.executeUpdate();
+			
 		} catch (ClassNotFoundException | SQLException e) {
 		
 			e.printStackTrace();
@@ -75,8 +71,9 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 	}
 
 	@Override
-	public void withdrawalBalance(long customerAccountNum, double amount) {
+	public void withdrawalBalance(int customerAccountNum, double amount) {
 		AccountInfo accInfo = new AccountInfo();
+		
 		double balance = accInfo.getInitialBalance();
 		balance = balance-amount;
 		
@@ -84,8 +81,11 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 				Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.Update_SQL_CUSTOMER_WITHDRAWAL_BY_ID)
 				){
-			
-				ps.setLong(1, customerAccountNum);
+				ps.setDouble(1, amount);
+				ps.setDouble(2, balance);
+				ps.setInt(3, customerAccountNum);
+				
+				ps.executeUpdate();
 			
 			
 			
