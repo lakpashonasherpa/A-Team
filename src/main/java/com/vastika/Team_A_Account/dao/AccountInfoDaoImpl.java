@@ -24,7 +24,7 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 		try(
 				Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_INFO);
-			
+				PreparedStatement ps1 = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_BALANCE_BY_ID);
 				){
 				
 				ps.setString(1,accInfo.getCustomerName());
@@ -34,7 +34,9 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 				ps.setLong(5, accInfo.getCustomerUniqueIdNum());
 				ps.setDouble(6, accInfo.getInitialBalance());
 			
-			saved =ps.executeUpdate();
+				ps.executeUpdate();
+			saved=	ps1.executeUpdate();
+			
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -104,8 +106,8 @@ public class AccountInfoDaoImpl implements AccountInfoDao{
 				){
 				ps1.setLong(1,customerId);
 				ps2.setLong(1, customerId);
-				ps1.executeUpdate();
 				ps2.executeUpdate();
+				ps1.executeUpdate();
 		} catch (ClassNotFoundException |SQLException e) {
 			e.printStackTrace();
 		} 

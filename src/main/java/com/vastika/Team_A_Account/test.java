@@ -20,13 +20,12 @@ public class test {
 
 	public static void main(String[] args) {
 		AccontBalanceService accBalServ = new AccontBalanceServiceImpl();
-		//double balance=1000;
+		double balance=1000;
 		double depositamount=4000;
 		double withdrawamount=300;
 		int customerId=8;
 		
-		accBalServ.depositBalance(customerId, depositamount);
-		accBalServ.withdrawalBalance(customerId,withdrawamount);
+		accBalServ.displayAccountInfo(customerId,balance);
 		System.out.println("success");
 		
 		

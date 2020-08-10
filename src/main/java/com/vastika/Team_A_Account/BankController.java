@@ -23,10 +23,10 @@ public class BankController {
 			switch (selection) {
 			
 			case 1:
-				System.out.println("1.Add New Customer |2.Update Current Customer");
+				System.out.println("1.Add New Customer | 2.Update Current Customer | 3.Delete Customer");
 				int selection1 = input.nextInt();
 				if(selection1==1) {
-					
+					System.out.println("------Add Account------");
 				AccountInfo saveCustomer = getCustomerInfo();
 				accInfoServ.saveCustomerInfo(saveCustomer);
 				System.out.println("*********************************************");
@@ -35,6 +35,7 @@ public class BankController {
 				break;
 				
 				}else if(selection1==2) {
+					System.out.println("------Update Account------");
 					//AccountInfo accIn = new AccountInfo();
 					AccountInfo updateCustomer = getCustomerUpdateInfo();
 					accInfoServ.updateCustomerInfo(updateCustomer);
@@ -42,6 +43,16 @@ public class BankController {
 					System.out.println("Success!!");
 					System.out.println("Data has been updated!!!");
 					break;
+				}else if (selection1==3) {
+					System.out.println("------Delete Account------");
+					
+						System.out.println("Enter Id:");
+		           	  int deleteId = input.nextInt();	  
+		           	accInfoServ.deleteCustomerInfo(deleteId);
+		           	System.out.println("*********************************************");
+		           	System.out.println("Success!!");
+					System.out.println("Data has been deleted!!!");
+		           	  break;
 					
 				}else {
 					System.out.println("Invalid Input!!!\n"
@@ -51,14 +62,13 @@ public class BankController {
 				break;
 			case 2:
 				
-				
 				System.out.println("View Customer Records| Update Balance: ");
 				System.out.println("*********************************************");
 				System.out.println("1. View current Customer Records | 2. Update Balance");
 				int selection2= input.nextInt();
 				switch (selection2) {
 				case 1:
-					System.out.println("1.View by CustomerID|2.View all records");
+					System.out.println("1.View by CustomerID| 2.View all records");
 					int selection3 = input.nextInt();
 					if(selection3==1) {
 						//view by customerID
@@ -118,15 +128,15 @@ public class BankController {
 		String idType = sc.next();
 		System.out.println("Enter document id number: ");
 		long uniqueIdnum = sc.nextLong();
-		//System.out.println("Enter initial balance: ");
-		//double bal = sc.nextDouble();
+		System.out.println("Enter initial balance: ");
+		double bal = sc.nextDouble();
 		
 		accInfoCustomerInfo.setCustomerName(name);
 		accInfoCustomerInfo.setCustomerAddress(address);
 		accInfoCustomerInfo.setCustomerPhoneNumber(phone);
 		accInfoCustomerInfo.setCustomerUniqueIdType(idType);
 		accInfoCustomerInfo.setCustomerUniqueIdNum(uniqueIdnum);
-		accInfoCustomerInfo.setInitialBalance(0);
+		accInfoCustomerInfo.setInitialBalance(bal);
 		
 		
 		}catch (Exception e) {

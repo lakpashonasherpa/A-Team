@@ -6,7 +6,6 @@ public class AccountInfoBalanceReport {
 	private String customerName;
 	//private String customerAddress;
 	private double initialBalance;
-
 	private double deposit; 
 	private double withdrawal;
 

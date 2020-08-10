@@ -29,6 +29,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_BALANCE_BY_ID);
 				){
 			ps.setDouble(1, amount);
+			//ps.setInt(2, x);
 			
 			
 			ps.executeUpdate();

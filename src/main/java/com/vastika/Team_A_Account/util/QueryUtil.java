@@ -13,7 +13,7 @@ public class QueryUtil {
 	//this is for deleting customer balance with customer account id
 	public static final String  DELETE_SQL_CUSTOMER_BALANCE= "delete from account_balance where customer_id=?";
 	public static final String GET_BY_ID_SQL_CUSTOMER= "select * from account_info where customer_id=?";
-	public static final String INSERT_SQL_CUSTOMER_BALANCE_BY_ID = "insert into account_balance( account_balance,customer_id) values(?,?)";
+	public static final String INSERT_SQL_CUSTOMER_BALANCE_BY_ID = "insert into account_balance(account_balance, customer_id) select initial_balance,customer_id from account_info where customer_id = (select max(customer_id) from account_info);";
 	public static final String GET_SQL_CUSTOMER_DEPOSIT_BY_ID="select deposit_amount from account_balance where  customer_id=?";
 	public static final String Update_SQL_CUSTOMER_WITHDRAWAL_BY_ID="update account_balance set withdraw_amount =?, account_balance =? where customer_id=?";
 	public static final String LIST_SQL_CUSTOMER_BALANCE="select account_info.customer_id, account_info.customer_name, account_balance.account_balance, account_balance.deposit_amount, account_balance.withdraw_amount from account_info inner join account_balance on account_info.customer_id = account_balance.customer_id where account_info.customer_id=?";
