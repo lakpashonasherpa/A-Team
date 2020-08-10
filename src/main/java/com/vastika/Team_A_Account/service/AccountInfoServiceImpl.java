@@ -11,31 +11,31 @@ public class AccountInfoServiceImpl implements  AccountInfoService{
 	@Override
 	public int saveCustomerInfo(AccountInfo accInfo) {
 	
-		return 0;
+		return accInfoD.saveCustomerInfo(accInfo);
 	}
 
 	@Override
 	public int updateCustomerInfo(AccountInfo accInfo) {
 	
-		return 0;
+		return accInfoD.updateCustomerInfo(accInfo);
 	}
 
 	@Override
-	public void deleteCustomerInfo(long customerId) {
+	public void deleteCustomerInfo(int customerId) {
 	
-		
+		accInfoD.deleteCustomerInfo(customerId);
 	}
 
 	@Override
-	public AccountInfo getCustomerById(long customerId) {
+	public AccountInfo getCustomerById(int customerId) {
 		
-		return null;
+		return accInfoD.getCustomerById(customerId);
 	}
 
 	@Override
 	public List<AccountInfo> getAllCustomerList() {
 		
-		return null;
+		return accInfoD.getAllCustomerList();
 	}
 
 }

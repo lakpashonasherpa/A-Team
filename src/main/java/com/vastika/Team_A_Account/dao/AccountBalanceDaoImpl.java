@@ -16,24 +16,29 @@ import com.vastika.Team_A_Account.util.QueryUtil;
 public class AccountBalanceDaoImpl implements AccountBalanceDao {
 
 	@Override
-	public void displayAccountInfo(long customerAccountNum) {
+	public void displayAccountInfo(long customerAccountNum, double amount) {
+		
 		AccountInfo accInfo = new AccountInfo();
 		AccountBalance accBal = new AccountBalance();
-		customerAccountNum = accInfo.getCustomerAccountNum();
-		//double balance= accBal.getInitialBalance();
+		//customerAccountNum = accInfo.getCustomerAccountNum();
+		//double balance= accBal.getAccountBalance();
 		try(
 				Connection con = DBUtil.getConnection();
-				PreparedStatement ps = con.prepareStatement(QueryUtil.Update_SQL_CUSTOMER_BALANCE_BY_ID)
+				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_BALANCE_BY_ID);
 				){
-			ps.setLong(1, customerAccountNum);
-			ResultSet rs = ps.executeQuery();
+			ps.setDouble(1, amount);
+			//ps.setLong(2, customerAccountNum);
 			
+			ps.executeUpdate();
+			//ResultSet rs = ps.executeQuery();
+			/*
 			if(rs.next()) {
 				accBal.setTranscationId(rs.getLong("account_transaction_id"));
 				accBal.setAccountBalance(rs.getDouble("account_balance"));
 				accBal.setDeposit(rs.getDouble("deposit_amount"));
 				accBal.setWithdrawal(rs.getDouble("withdraw_amount"));
 			}
+			*/
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			

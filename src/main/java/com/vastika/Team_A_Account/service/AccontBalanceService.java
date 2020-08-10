@@ -5,9 +5,9 @@ import java.util.List;
 import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
 
 public interface AccontBalanceService {
-	void displayAccountInfo(long customerAccountNum);
-	void depositBalance(long customerAccountNum, double amount);
-	void withdrawalBalance(long customerAccountNum, double amount);
+	void displayAccountInfo(int customerAccountNum, double amount);
+	void depositBalance(int customerAccountNum, double amount);
+	void withdrawalBalance(int customerAccountNum, double amount);
 	List<AccountInfoBalanceReport> getAllAccountBalancewithCustomerInfo();
 	
 }

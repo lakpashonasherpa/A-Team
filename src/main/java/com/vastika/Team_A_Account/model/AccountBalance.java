@@ -7,7 +7,7 @@ public class AccountBalance {
 	private double deposit; 
 	private double withdrawal;
 	private double accountBalance;
-	private long account_info_id;
+	private long customer_id;
 	
 	public long getTranscationId() {
 		return transcationId;
@@ -34,18 +34,27 @@ public class AccountBalance {
 		this.accountBalance = accountBalance;
 	} 
 	
-	public long  accountInfoId() {
-		AccountInfo ac = new AccountInfo();
-		long accountId= ac.getCustomerAccountNum();
+	
+	public void  accountInfoId(AccountInfo ac) {
 		
-		return accountId;
+		//long accountId= ac.
+		
+		//return accountId;
 		
 	}
+	/*
 	public long getAccount_info_id() {
 		return account_info_id;
 	}
 	public void setAccount_info_id(long account_info_id) {
 		this.account_info_id = account_info_id;
 	}
+	*/
 	
+	public long getCustomer_id() {
+		return customer_id;
+	}
+	public void setCustomer_id(long customer_id) {
+		this.customer_id = customer_id;
+	}
 }
