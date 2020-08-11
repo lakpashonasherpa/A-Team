@@ -2,51 +2,51 @@ package com.vastika.Team_A_Account.model;
 
 public class AccountInfoBalanceReport {
 	
-	private long customerAccountNum;
-	private String customerName;
+	private long CustomerAccountNum;
+	private String CustomerName;
 	//private String customerAddress;
-	private double initialBalance;
-	private double deposit; 
-	private double withdrawal;
+	private double InitialBalance;
+	private double Deposit; 
+	private double Withdrawal;
 
 	public double getWithdrawal() {
-		return withdrawal;
+		return Withdrawal;
 	}
 
 	public void setWithdrawal(double withdrawal) {
-		this.withdrawal = withdrawal;
+		this.Withdrawal = withdrawal;
 	}
 
 	public long getCustomerAccountNum() {
-		return customerAccountNum;
+		return CustomerAccountNum;
 	}
 
 	public void setCustomerAccountNum(long customerAccountNum) {
-		this.customerAccountNum = customerAccountNum;
+		this.CustomerAccountNum = customerAccountNum;
 	}
 
 	public String getCustomerName() {
-		return customerName;
+		return CustomerName;
 	}
 
 	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+		this.CustomerName = customerName;
 	}
 
 	public double getInitialBalance() {
-		return initialBalance;
+		return InitialBalance;
 	}
 
 	public void setInitialBalance(double initialBalance) {
-		this.initialBalance = initialBalance;
+		this.InitialBalance = initialBalance;
 	}
 
 	public double getDeposit() {
-		return deposit;
+		return Deposit;
 	}
 
 	public void setDeposit(double deposit) {
-		this.deposit = deposit;
+		this.Deposit = deposit;
 	}
 	
 	

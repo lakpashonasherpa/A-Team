@@ -1,8 +1,12 @@
 package com.vastika.Team_A_Account;
+import java.util.List;
 import java.util.Scanner;
 
+import com.vastika.Team_A_Account.dao.AccountInfoBalanceReportDao;
+import com.vastika.Team_A_Account.dao.AccountInfoBalanceReportDaoImpl;
 import com.vastika.Team_A_Account.model.AccountBalance;
 import com.vastika.Team_A_Account.model.AccountInfo;
+import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
 import com.vastika.Team_A_Account.service.AccontBalanceService;
 import com.vastika.Team_A_Account.service.AccontBalanceServiceImpl;
 import com.vastika.Team_A_Account.service.AccountInfoService;
@@ -72,9 +76,32 @@ public class BankController {
 					int selection3 = input.nextInt();
 					if(selection3==1) {
 						//view by customerID
+						//AccontBalanceService accBalServ = new AccontBalanceServiceImpl();
+						AccountInfoBalanceReportDao accInfBalRepo= new AccountInfoBalanceReportDaoImpl();
+						System.out.println("Enter customer ID: ");
+						int customerId=input.nextInt();
+						
+						//accInfBalRepo.displayAll();
+						System.out.println("==================================================");
+						AccountInfoBalanceReport report= accInfBalRepo.displayById(customerId);
+						System.out.println("Customer Id is:"+report.getCustomerAccountNum());
+						System.out.println("Customer name is: "+report.getCustomerName());
+						System.out.println("Initial balance: "+report.getInitialBalance());
+						System.out.println("Deposited ammount: "+report.getDeposit());
+						System.out.println("Withdraw ammount: "+report.getWithdrawal());
 					}else if(selection3==2) {
 						//view all records
+						AccountInfoBalanceReportDao accInfBalRepo= new AccountInfoBalanceReportDaoImpl();
+						List<AccountInfoBalanceReport> customerReportList =accInfBalRepo.displayAll();
+						for (AccountInfoBalanceReport u : customerReportList) {
+							System.out.println("Customer Id is:"+u.getCustomerAccountNum());
+							System.out.println("Customer name is: "+u.getCustomerName());
+							System.out.println("Initial balance: "+u.getInitialBalance());
+							System.out.println("Deposited ammount: "+u.getDeposit());
+							System.out.println("Withdraw ammount: "+u.getWithdrawal());
+							System.out.println("==============");
 					}
+						}
 					break;
 				case 2:
 					System.out.println("Update Balance");
@@ -92,7 +119,7 @@ public class BankController {
 						
 						System.out.println("Success!!");
 						System.out.println("Amount has been withdrawn!!!");
-						//System.out.println("Your current Balnace is");
+						
 						break;
 					}
 					

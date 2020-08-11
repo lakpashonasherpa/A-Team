@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.protocol.Resultset;
 import com.vastika.Team_A_Account.model.AccountBalance;
 import com.vastika.Team_A_Account.model.AccountInfo;
 import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
@@ -44,26 +45,31 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 
 	@Override
 	public void depositBalance(int customerAccountNum, double amount) {
-		double balance =0;
+		int balance =0;
 		AccountInfo accInfo = new AccountInfo();
 		
 		//double balance= accInfo.getInitialBalance();
 		
-		balance = balance+amount;
+		//
 		
 		try(
 				Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.UPDATE_SQL_CUSTOMER_DEPOSIT_BY_ID);
-				//PreparedStatement ps1 = con.prepareStatement(QueryUtil.GET_SQL_CUSTOMER_DEPOSIT_BY_ID);
+				
 				
 				){
 			
 			ps.setDouble(1, amount);
-			ps.setDouble(2, balance);
-			ps.setLong(3, customerAccountNum);
-			
+			//ps.setDouble(2, balance);
+			ps.setInt(2, customerAccountNum);
 			ps.executeUpdate();
+		
+			PreparedStatement ps1 = con.prepareStatement(QueryUtil.GET_CUST_BAL_FOR_DEPOSIT);
 			
+			//balance = balance+amount;
+			
+			ResultSet rs = ps1.executeQuery();
+			double queryBal= rs.getDouble(balance);
 		} catch (ClassNotFoundException | SQLException e) {
 		
 			e.printStackTrace();
