@@ -4,18 +4,15 @@ package com.vastika.Team_A_Account.dao;
 import java.util.List;
 
 import com.vastika.Team_A_Account.model.AccountBalance;
+import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
 
 public interface AccountBalanceDao {
 	
-	int saveBalanceInfo(AccountBalance account);
-	
-	int updateBalanceInfo(AccountBalance account);
-	
-	void deleteBalanceInfo(AccountBalance account);
-	
-	AccountBalance getBalanceInfoById(int id);
-	
-	List<AccountBalance>getAllAcInfo();
+	void displayAccountInfo(int customerAccountNum, double amount);
+	void depositBalance(int customerAccountNum, double amount);
+	void withdrawalBalance( int customerAccountNum,double amount);
+	List<AccountInfoBalanceReport> getAllAccountBalancewithCustomerInfo();
+	int depositeBalance(AccountBalance depositAmount);
 	
 
 }

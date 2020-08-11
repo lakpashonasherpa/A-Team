@@ -29,7 +29,7 @@ public class QueryUtil {
 	public static final String LIST_SQL_CUSTOMER_BALANCE="select account_info.customer_id, account_info.customer_name, account_balance.account_balance, account_balance.deposit_amount, account_balance.withdraw_amount from account_info inner join account_balance on account_info.customer_id = account_balance.customer_id where account_info.customer_id=?";
 
 	//displayReport query list
-	public static final String LIST_CUSTOMER_RECORD_SQL_BY_ID="SELECT acco FROM account_info inner join account_balance WHERE account_info.customer_id = account_balance.customer_id;";
+	public static final String LIST_CUSTOMER_RECORD_SQL_BY_ID="SELECT account_info.customer_id, account_info.customer_name,account_info.initial_balance, account_balance.deposit_amount FROM account_info inner join account_balance WHERE account_info.customer_id = account_balance.customer_id;";
 	
 
 

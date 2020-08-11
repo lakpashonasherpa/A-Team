@@ -16,17 +16,36 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 	@Override
 	public int saveCustomerInfo(AccountInfo customer) {
 		int saved = 0;
-		try (Connection con = DBUtil.getConnection();
-				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER);) {
-			ps.setString(1, customer.getName());
-			ps.setString(2, customer.getAddress());
-			ps.setLong(3, customer.getMobileNo());
-			ps.setInt(4, customer.getUniqueId());
+		try (
+				Connection con = DBUtil.getConnection();
+				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER);
+		// PreparedStatement ps1=con.prepareStatement(QueryUtil.UDATE_SQL_DEPOSITE);
+
+		) {
+			ps.setInt(1, customer.getId());
+			ps.setString(2, customer.getName());
+			ps.setString(3, customer.getAddress());
+			ps.setLong(4, customer.getMobileNo());
+			ps.setString(5, customer.getCustomerUniqueIdType());
+			ps.setInt(6, customer.getUniqueId());
 
 			saved = ps.executeUpdate();
+			ps.close();
 
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			try (Connection con1 = DBUtil.getConnection();
+					PreparedStatement ps1 = con.prepareStatement(QueryUtil.INSERT_SQL_INITIAL_DEPOSITE);
+
+			) {
+				ps1.setInt(1, customer.getId());
+				ps1.setDouble(2, customer.getInitialBalance());
+
+				saved = ps1.executeUpdate();
+				ps1.close();
+
+			}
+
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
 		}
 		return saved;
 	}
@@ -36,6 +55,7 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 		int update = 0;
 		try (Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.UPDATE_SQL_CUSTOMER);) {
+
 			ps.setString(1, customer.getName());
 			ps.setString(2, customer.getAddress());
 			ps.setLong(3, customer.getMobileNo());
@@ -67,20 +87,18 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 
 	@Override
 	public AccountInfo getCustomerInfoByID(int id) {
-		AccountInfo customer=new AccountInfo();
+		AccountInfo customer = new AccountInfo();
 		try (Connection con = DBUtil.getConnection();
-				PreparedStatement ps = con.prepareStatement(QueryUtil.GET_BY_ID_SQL_CUSTOMER);
-				) {
+				PreparedStatement ps = con.prepareStatement(QueryUtil.GET_BY_ID_SQL_CUSTOMER);) {
 			ps.setInt(1, id);
-			ResultSet rs=ps.executeQuery();
-			if(rs.next()) {
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
 				customer.setId(rs.getInt("account_id"));
 				customer.setName(rs.getString("customer_name"));
 				customer.setAddress(rs.getString("customer_address"));
 				customer.setMobileNo(rs.getLong("customer_mobileNum"));
 				customer.setUniqueId(rs.getInt("customer_unique_no"));
 			}
-			
 
 		} catch (ClassNotFoundException | SQLException e) {
 
@@ -92,28 +110,31 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 
 	@Override
 	public List<AccountInfo> getAllCustomerInfo() {
-		AccountInfo customer=new AccountInfo();
-		List<AccountInfo> getAllCustomer=new ArrayList<AccountInfo>();
-		try(
-			Connection con =DBUtil.getConnection();
-				PreparedStatement ps =con.prepareStatement(QueryUtil.LIST_SQL_CUSTOMER);
-				){
-			ResultSet rs=ps.executeQuery();
-			while(rs.next()) {
+		AccountInfo customer = new AccountInfo();
+		List<AccountInfo> getAllCustomer = new ArrayList<AccountInfo>();
+		try (Connection con = DBUtil.getConnection();
+				PreparedStatement ps = con.prepareStatement(QueryUtil.LIST_SQL_CUSTOMER);) {
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
 				customer.setId(rs.getInt("account_id"));
 				customer.setName(rs.getString("customer_name"));
 				customer.setAddress(rs.getString("customer_address"));
 				customer.setMobileNo(rs.getLong("customer_mobileNum"));
 				customer.setUniqueId(rs.getInt("customer_unique_id"));
 				getAllCustomer.add(customer);
-				
+
 			}
-			
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		return getAllCustomer;
+	}
+
+	@Override
+	public void saveCustomerBalance(double amount, int customerId) {
+		
+		
 	}
 
 }

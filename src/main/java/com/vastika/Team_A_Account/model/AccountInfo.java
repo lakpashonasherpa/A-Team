@@ -5,7 +5,26 @@ public class AccountInfo {
 	private String name;
 	private String address;
 	private long mobileNo;
+	private String customerUniqueIdType;
 	private int uniqueId;
+
+	private double initialBalance;
+
+	public String getCustomerUniqueIdType() {
+		return customerUniqueIdType;
+	}
+
+	public void setCustomerUniqueIdType(String customerUniqueIdType) {
+		this.customerUniqueIdType = customerUniqueIdType;
+	}
+
+	public double getInitialBalance() {
+		return initialBalance;
+	}
+
+	public void setInitialBalance(double initialBalance) {
+		this.initialBalance = initialBalance;
+	}
 
 	public int getId() {
 		return id;

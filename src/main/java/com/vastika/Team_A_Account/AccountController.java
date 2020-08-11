@@ -24,7 +24,7 @@ public class AccountController {
 		AccountInfo customerInfo = getCustomerInfo("type", reader);
 
 		int saved = customerDao.saveCustomerInfo(customerInfo);
-		if (saved >= 1) {
+		if (saved >=1) {
 			System.out.println("data enter is successful");
 		} else {
 			System.out.println("error in db.");
@@ -63,6 +63,9 @@ public class AccountController {
 		return customerInfo;
 
 	}
+	
+	
+	
 
 	public static AccountBalance getDepositeInfo(String type, Scanner reader) {
 		AccountBalance balance = new AccountBalance();
@@ -76,7 +79,7 @@ public class AccountController {
 	}
 	public static AccountBalance getWithdrawInfo(String type, Scanner reader) {
 		AccountBalance balance = new AccountBalance();
-		System.out.println("Enter the ammount you wanna withdraw: ");
+		System.out.println("Enter the ammount you want to withdraw: ");
 		double withdraw = reader.nextDouble();
 
 		balance.setDepositAmount(withdraw);

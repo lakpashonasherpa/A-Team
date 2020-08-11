@@ -6,10 +6,12 @@ import java.util.Scanner;
 import com.vastika.Team_A_Account.dao.AccountInfoBalanceReportDao;
 import com.vastika.Team_A_Account.dao.AcountInfoBalanceReportDaoImpl;
 import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
+import com.vastika.Team_A_Account.service.AccountInfoBalanceReportService;
+import com.vastika.Team_A_Account.service.AccountInfoBalanceReportServiceImpl;
 
 public class testController {
 	public static void main(String[] args) {
-		AccountInfoBalanceReportDao reportDao= new AcountInfoBalanceReportDaoImpl();
+		AccountInfoBalanceReportService reportDao= new AccountInfoBalanceReportServiceImpl();
 		
 		
 		

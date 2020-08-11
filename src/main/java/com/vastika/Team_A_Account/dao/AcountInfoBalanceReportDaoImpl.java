@@ -18,7 +18,7 @@ public class AcountInfoBalanceReportDaoImpl implements AccountInfoBalanceReportD
 		AccountInfoBalanceReport infoReport=new AccountInfoBalanceReport();
 		try(
 				Connection con=DBUtil.getConnection();
-				PreparedStatement ps=con.prepareStatement(QueryUtil.GET_BY_TID_SQL_BALANCE);
+				PreparedStatement ps=con.prepareStatement(QueryUtil.GET_BY_ID_SQL_BALANCE);
 				
 				){
 			ps.setLong(1,customerId);
@@ -67,14 +67,7 @@ public class AcountInfoBalanceReportDaoImpl implements AccountInfoBalanceReportD
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-				
-		
-		
-		
-		
-		
-		
-		
+			
 		return report;
 	}
 
