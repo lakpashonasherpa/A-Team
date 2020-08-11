@@ -63,13 +63,8 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 			//ps.setDouble(2, balance);
 			ps.setInt(2, customerAccountNum);
 			ps.executeUpdate();
+			
 		
-			PreparedStatement ps1 = con.prepareStatement(QueryUtil.GET_CUST_BAL_FOR_DEPOSIT);
-			
-			//balance = balance+amount;
-			
-			ResultSet rs = ps1.executeQuery();
-			double queryBal= rs.getDouble(balance);
 		} catch (ClassNotFoundException | SQLException e) {
 		
 			e.printStackTrace();
@@ -89,8 +84,8 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 				PreparedStatement ps = con.prepareStatement(QueryUtil.Update_SQL_CUSTOMER_WITHDRAWAL_BY_ID)
 				){
 				ps.setDouble(1, amount);
-				ps.setDouble(2, balance);
-				ps.setInt(3, customerAccountNum);
+				//ps.setDouble(2, balance);
+				ps.setInt(2, customerAccountNum);
 				
 				ps.executeUpdate();
 			

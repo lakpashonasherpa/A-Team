@@ -59,8 +59,7 @@ public class BankController {
 		           	  break;
 					
 				}else {
-					System.out.println("Invalid Input!!!\n"
-							+ "Please try again!!!");
+					System.out.println("Thank you");
 				}
 				
 				break;
@@ -126,8 +125,7 @@ public class BankController {
 				}
 			
 			default:
-				System.out.println("Invalid Input!!!\n"
-						+ "Please try again!!!");
+				System.out.println("Thank you!!!");
 				}
 			
 			}catch(Exception e) {

@@ -15,7 +15,7 @@ public class QueryUtil {
 	public static final String GET_BY_ID_SQL_CUSTOMER= "select account_info.customer_id, account_info.customer_name, account_balance.account_balance, account_balance.deposit_amount, account_balance.withdraw_amount from account_info inner join account_balance on account_info.customer_id = account_balance.customer_id where account_info.customer_id=?";
 	public static final String INSERT_SQL_CUSTOMER_BALANCE_BY_ID = "insert into account_balance(account_balance, customer_id) select initial_balance,customer_id from account_info where customer_id = (select max(customer_id) from account_info);";
 	public static final String GET_SQL_CUSTOMER_DEPOSIT_BY_ID="select deposit_amount from account_balance where  customer_id=?";
-	public static final String Update_SQL_CUSTOMER_WITHDRAWAL_BY_ID="update account_balance set withdraw_amount =?, account_balance =? where customer_id=?";
+	public static final String Update_SQL_CUSTOMER_WITHDRAWAL_BY_ID="update account_balance set withdraw_amount =? where customer_id=?";
 	public static final String LIST_SQL_CUSTOMER_BALANCE="select account_info.customer_id, account_info.customer_name, account_balance.account_balance, account_balance.deposit_amount, account_balance.withdraw_amount from account_info inner join account_balance on account_info.customer_id = account_balance.customer_id";
 	public static final String UPDATE_SQL_CUSTOMER_DEPOSIT_BY_ID ="update account_balance set deposit_amount=? where customer_id=?";
 	public static final String UPDATE_SQL_CUSTOMER_BALANCE= "update account_balance set account_balance = ? where customer_id=?";
