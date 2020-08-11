@@ -17,6 +17,10 @@ public class AccontBalanceServiceImpl implements AccontBalanceService {
 
 	@Override
 	public void depositBalance(int customerAccountNum, double amount) {
+		//AccounBalance accountBalance = dao.getAccountBalnceByCustomeId(customerAccountNum);
+		//double totalBalance = accountbalnce.getAccountBalnce()+amount;
+		//accountBalnce.setAccounbalnce(totalbalnece)
+		
 		accBald.depositBalance(customerAccountNum, amount);
 		
 	}

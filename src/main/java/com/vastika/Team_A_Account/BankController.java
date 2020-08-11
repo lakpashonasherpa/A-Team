@@ -12,14 +12,16 @@ import com.vastika.Team_A_Account.service.AccontBalanceServiceImpl;
 import com.vastika.Team_A_Account.service.AccountInfoService;
 import com.vastika.Team_A_Account.service.AccountInfoServiceImpl;
 
+
 public class BankController {
 		
 		public static void main(String[] args) {
 			Scanner input = new Scanner(System.in);
 			AccountInfoService accInfoServ = new AccountInfoServiceImpl();
 			AccontBalanceServiceImpl accBalServ = new AccontBalanceServiceImpl();
+			String decision = "";
 			try{
-			
+			do {
 			System.out.println("Please select 1|2 from below option: \n"
 					+ "1. Create|Edit Customer Account | 2. View Customer Records| Update Balance: ");
 			int selection = input.nextInt();
@@ -30,14 +32,31 @@ public class BankController {
 				System.out.println("1.Add New Customer | 2.Update Current Customer | 3.Delete Customer");
 				int selection1 = input.nextInt();
 				if(selection1==1) {
-					System.out.println("------Add Account------");
-				AccountInfo saveCustomer = getCustomerInfo();
-				accInfoServ.saveCustomerInfo(saveCustomer);
-				System.out.println("*********************************************");
-				System.out.println("Success!!");
-				System.out.println("Data has been saved!!!");
-				break;
-				
+					System.out.println("1.Current Account | 2. Saving Account");
+					int selection12= input.nextInt();
+					if(selection12==1) {
+						System.out.println("------Add Account------");
+							AccountInfo saveCustomer = getCustomerInfo();
+							//Account acc = new CurrentAccount();
+							accInfoServ.saveCustomerInfo(saveCustomer);
+							System.out.println("*********************************************");
+							System.out.println("Success!!");
+							System.out.println("Data has been saved!!!");
+							CurrentAccount ca = new CurrentAccount();
+							ca.openAccount();	
+							break;
+						}else if(selection12==2) {
+							System.out.println("------Add Account------");
+							AccountInfo saveCustomer = getCustomerInfo();
+							accInfoServ.saveCustomerInfo(saveCustomer);
+							System.out.println("*********************************************");
+							System.out.println("Success!!");
+							System.out.println("Data has been saved!!!");
+							
+							SavingAccount sa = new SavingAccount();
+							sa.openAccount();	
+							break;
+					}
 				}else if(selection1==2) {
 					System.out.println("------Update Account------");
 					//AccountInfo accIn = new AccountInfo();
@@ -67,7 +86,7 @@ public class BankController {
 				
 				System.out.println("View Customer Records| Update Balance: ");
 				System.out.println("*********************************************");
-				System.out.println("1. View current Customer Records | 2. Update Balance");
+				System.out.println("1.View current Customer Records | 2.Update Balance");
 				int selection2= input.nextInt();
 				switch (selection2) {
 				case 1:
@@ -125,9 +144,13 @@ public class BankController {
 				}
 			
 			default:
+				System.out.println("=====================");
 				System.out.println("Thank you!!!");
 				}
-			
+			System.out.println("");
+			System.out.println("Return to the main menu? (Y/N)");
+			decision = input.next().toLowerCase();
+			}while(decision.equals("y"));
 			}catch(Exception e) {
 				System.out.println(e);
 			}finally {
@@ -139,7 +162,6 @@ public class BankController {
 	public static AccountInfo getCustomerInfo() {
 	
 		AccountInfo accInfoCustomerInfo = new AccountInfo();
-		AccountBalance accBal = new AccountBalance();
 		
 		Scanner sc = new Scanner(System.in);
 		try{
@@ -182,7 +204,6 @@ public class BankController {
 		
 		accInfoCustomerInfo.setCustomerAccountNum(customerAccountNum);
 		 
-		
 		System.out.println("Enter customer name: ");
 		String name = sc.next();
 		System.out.println("Enter customer address: ");
@@ -230,6 +251,10 @@ public class BankController {
 		AccontBalanceService accBalServ = new AccontBalanceServiceImpl();
 		accBalServ.depositBalance(customerId, amount);
 		sc.close();
+	}
+	
+	public static void openAccount(Account ac) {
+		ac.openAccount();
 	}
 	
 	}
