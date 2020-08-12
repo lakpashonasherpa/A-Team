@@ -19,7 +19,7 @@ public class QueryUtil {
 	public static final String UPDATE_SQL_BALANCE="update account_balance set account_transaction_id=?,account_balance=?,deposit_amount=?,withdraw_amount=? where account_info_id=?";
 	public static final String LIST_SQL_BALANCE="select * from account_balance";
 	public static final String GET_BY_ID_SQL_BALANCE="select * from account_balance where customer_id=?";
-	public static final String DELETE_SQL_BALANCE="delete from account_balance where account_transaction_id=?";
+	public static final String DELETE_SQL_CUSTOMER_BALANCE="delete from account_balance where account_transaction_id=?";
 	public static final String INSERT_DEPOSIT_SQL_BY_JOIN="insert into account_balance(account_transaction_id,account_balance) values(?,?) select account_id from account_info join";
 	public static final String DEPOSIT="insert into table account_balance(deposit_amount)value(?)";
 	public static final String INSERT_SQL_CUSTOMER_BALANCE_INNER_JOIN= "Insert into account_balance (account_balance,customer_id) values(?,?) select account_balance.account_balance, account_balance.customer_id From account_info inner join account_balance on account_info.customer_id = account_balance.customer_id";

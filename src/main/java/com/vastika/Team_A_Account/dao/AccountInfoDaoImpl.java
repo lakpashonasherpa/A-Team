@@ -19,30 +19,20 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 		try (
 				Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER);
-		// PreparedStatement ps1=con.prepareStatement(QueryUtil.UDATE_SQL_DEPOSITE);
+				PreparedStatement ps1=con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_BALANCE_BY_ID);
 
 		) {
-			ps.setInt(1, customer.getId());
-			ps.setString(2, customer.getName());
-			ps.setString(3, customer.getAddress());
-			ps.setLong(4, customer.getMobileNo());
-			ps.setString(5, customer.getCustomerUniqueIdType());
-			ps.setInt(6, customer.getUniqueId());
+			ps.setString(1, customer.getCustomerName());
+			ps.setString(2, customer.getCustomerAddress());
+			ps.setLong(3, customer.getCustomerPhoneNumber());
+			ps.setString(4, customer.getCustomerUniqueIdType());
+			ps.setDouble(5, customer.getCustomerUniqueId());
+			ps.setDouble(6, customer.getInitialBalance());
 
-			saved = ps.executeUpdate();
+				ps.executeUpdate();
+			saved = ps1.executeUpdate();
 			ps.close();
 
-			try (Connection con1 = DBUtil.getConnection();
-					PreparedStatement ps1 = con.prepareStatement(QueryUtil.INSERT_SQL_INITIAL_DEPOSITE);
-
-			) {
-				ps1.setInt(1, customer.getId());
-				ps1.setDouble(2, customer.getInitialBalance());
-
-				saved = ps1.executeUpdate();
-				ps1.close();
-
-			}
 
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
@@ -56,11 +46,13 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 		try (Connection con = DBUtil.getConnection();
 				PreparedStatement ps = con.prepareStatement(QueryUtil.UPDATE_SQL_CUSTOMER);) {
 
-			ps.setString(1, customer.getName());
-			ps.setString(2, customer.getAddress());
-			ps.setLong(3, customer.getMobileNo());
-			ps.setInt(4, customer.getUniqueId());
-			ps.setInt(5, customer.getId());
+			ps.setString(1, customer.getCustomerName());
+			ps.setString(2, customer.getCustomerAddress());
+			ps.setLong(3, customer.getCustomerPhoneNumber());
+			ps.setString(4, customer.getCustomerUniqueIdType());
+			ps.setLong(5, customer.getCustomerUniqueId());
+			ps.setDouble(6, customer.getInitialBalance());
+			ps.setInt(7,customer.getCustomerAccountNum());
 
 			update = ps.executeUpdate();
 
@@ -72,11 +64,15 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 	}
 
 	@Override
-	public void deteteCustomerInfo(int id) {
+	public void deteteCustomerInfo(int customerId) {
 		try (Connection con = DBUtil.getConnection();
-				PreparedStatement ps = con.prepareStatement(QueryUtil.DELETE_SQL_CUSTOMER);) {
+				PreparedStatement ps = con.prepareStatement(QueryUtil.DELETE_SQL_CUSTOMER);
+				PreparedStatement ps1= con.prepareStatement(QueryUtil.DELETE_SQL_CUSTOMER_BALANCE)
+				
+				) {
 
-			ps.setInt(1, id);
+			ps.setInt(1, customerId);
+			
 			ps.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -93,11 +89,15 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				customer.setId(rs.getInt("account_id"));
-				customer.setName(rs.getString("customer_name"));
-				customer.setAddress(rs.getString("customer_address"));
-				customer.setMobileNo(rs.getLong("customer_mobileNum"));
-				customer.setUniqueId(rs.getInt("customer_unique_no"));
+				//customer.setId(rs.getInt("account_id"));
+				customer.setCustomerName(rs.getString("customer_name"));
+				customer.setCustomerAddress(rs.getString("customer_address"));
+				customer.setCustomerPhoneNumber(rs.getLong("customer_mobileNum"));
+				customer.setCustomerUniqueIdType(rs.getString("customer_unique_idType"));
+				customer.setCustomerUniqueId(rs.getInt("customer_unique_id_number"));
+				customer.setInitialBalance(rs.getDouble("inititalBalance"));
+				
+			
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -116,11 +116,16 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 				PreparedStatement ps = con.prepareStatement(QueryUtil.LIST_SQL_CUSTOMER);) {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				customer.setId(rs.getInt("account_id"));
-				customer.setName(rs.getString("customer_name"));
-				customer.setAddress(rs.getString("customer_address"));
-				customer.setMobileNo(rs.getLong("customer_mobileNum"));
-				customer.setUniqueId(rs.getInt("customer_unique_id"));
+				customer.setCustomerAccountNum(rs.getInt("account_id"));
+				customer.setCustomerName(rs.getString("customer_name"));
+				customer.setCustomerAddress(rs.getString("customer_address"));
+				customer.setCustomerPhoneNumber(rs.getLong("customer_mobileNum"));
+				customer.setCustomerUniqueId(rs.getInt("customer_unique_id"));
+				customer.setCustomerUniqueIdType(rs.getString("customer_unique_idType"));
+				customer.setCustomerUniqueId(rs.getInt("customer_unique_id_number"));
+				customer.setInitialBalance(rs.getDouble("inititalBalance"));
+				
+				
 				getAllCustomer.add(customer);
 
 			}
@@ -133,7 +138,23 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 
 	@Override
 	public void saveCustomerBalance(double amount, int customerId) {
-		
+		int saved=0;
+		AccountInfo accInfo = new AccountInfo();
+		try(
+				Connection con = DBUtil.getConnection();
+				PreparedStatement ps = con.prepareStatement(QueryUtil.INSERT_SQL_CUSTOMER_BALANCE_BY_ID);
+				
+				){
+			
+				//double balance1 = 4500;
+				//int customerId =8;
+				ps.setDouble(1, amount);
+				ps.setLong(2, customerId);
+				
+			saved =ps.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} 
 		
 	}
 

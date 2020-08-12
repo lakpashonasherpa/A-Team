@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.vastika.Team_A_Account.dao.AccountInfoBalanceReportDao;
-import com.vastika.Team_A_Account.dao.AcountInfoBalanceReportDaoImpl;
+import com.vastika.Team_A_Account.dao.AccountInfoBalanceReportDaoImpl;
 import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
 import com.vastika.Team_A_Account.service.AccountInfoBalanceReportService;
 import com.vastika.Team_A_Account.service.AccountInfoBalanceReportServiceImpl;

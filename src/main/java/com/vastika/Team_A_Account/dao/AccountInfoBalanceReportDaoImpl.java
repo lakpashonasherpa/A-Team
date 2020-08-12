@@ -11,7 +11,7 @@ import com.vastika.Team_A_Account.model.AccountInfoBalanceReport;
 import com.vastika.Team_A_Account.util.DBUtil;
 import com.vastika.Team_A_Account.util.QueryUtil;
 
-public class AcountInfoBalanceReportDaoImpl implements AccountInfoBalanceReportDao{
+public class AccountInfoBalanceReportDaoImpl implements AccountInfoBalanceReportDao{
 
 	@Override
 	public AccountInfoBalanceReport displayById(int customerId) {

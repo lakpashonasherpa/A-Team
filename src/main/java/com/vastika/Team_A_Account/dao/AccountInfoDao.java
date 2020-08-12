@@ -6,13 +6,13 @@ import com.vastika.Team_A_Account.model.AccountInfo;
 
 public interface AccountInfoDao {
 
-	int saveCustomerInfo(AccountInfo customer);
+	int saveCustomerInfo(AccountInfo accInfo);
 	void saveCustomerBalance( double amount, int customerId);
-	int updateCustomerInfo(AccountInfo customer);
+	int updateCustomerInfo(AccountInfo accInfo);
 
-	void deteteCustomerInfo(int id);
+	void deteteCustomerInfo(int customerId);
 
-	AccountInfo getCustomerInfoByID(int id);
+	AccountInfo getCustomerInfoByID(int customerId);
 	
 	List<AccountInfo>getAllCustomerInfo();
 

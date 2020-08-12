@@ -19,8 +19,8 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 
 	@Override
 	public void displayAccountInfo(int customerAccountNum, double amount) {
-		AccountInfo accInfo = new AccountInfo();
-		AccountBalance accBal = new AccountBalance();
+		//AccountInfo accInfo = new AccountInfo();
+		//AccountBalance accBal = new AccountBalance();
 		//customerAccountNum = accInfo.getCustomerAccountNum();
 		//double balance= accBal.getAccountBalance();
 		try(
@@ -46,11 +46,11 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 	@Override
 	public void depositBalance(int customerAccountNum, double amount) {
 		double balance =0;
-		AccountInfo accInfo = new AccountInfo();
+		//AccountInfo accInfo = new AccountInfo();
 		
 		//double balance= accInfo.getInitialBalance();
 		
-		balance = balance+amount;
+		//balance = balance+amount;
 		
 		try(
 				Connection con = DBUtil.getConnection();
@@ -60,7 +60,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 				){
 			
 			ps.setDouble(1, amount);
-			ps.setDouble(2, balance);
+			//ps.setDouble(2, balance);
 			ps.setLong(3, customerAccountNum);
 			
 			ps.executeUpdate();
@@ -75,7 +75,7 @@ public class AccountBalanceDaoImpl implements AccountBalanceDao {
 
 	@Override
 	public void withdrawalBalance(int customerAccountNum, double amount) {
-AccountInfo accInfo = new AccountInfo();
+		AccountInfo accInfo = new AccountInfo();
 		
 		double balance = accInfo.getInitialBalance();
 		balance = balance-amount;
@@ -134,10 +134,10 @@ AccountInfo accInfo = new AccountInfo();
 		
 	}
 
-	@Override
-	public int depositeBalance(AccountBalance depositAmount) {
-		
-		return 0;
-	}
+//	@Override
+//	public int depositeBalance(AccountBalance depositAmount) {
+//		
+//		return 0;
+//	}
 
 }

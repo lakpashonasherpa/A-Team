@@ -1,69 +1,57 @@
 package com.vastika.Team_A_Account.model;
 
 public class AccountInfo {
-	private int id;
-	private String name;
-	private String address;
-	private long mobileNo;
+	private int customerAccountNum;
+	private String customerName;
+	private String customerAddress;
+	private long customerPhoneNumber;
 	private String customerUniqueIdType;
-	private int uniqueId;
-
+	private long customerUniqueId;
 	private double initialBalance;
-
+	
+	
+	public int getCustomerAccountNum() {
+		return customerAccountNum;
+	}
+	public void setCustomerAccountNum(int customerAccountNum) {
+		this.customerAccountNum = customerAccountNum;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getCustomerAddress() {
+		return customerAddress;
+	}
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
+	}
+	public long getCustomerPhoneNumber() {
+		return customerPhoneNumber;
+	}
+	public void setCustomerPhoneNumber(long customerPhoneNumber) {
+		this.customerPhoneNumber = customerPhoneNumber;
+	}
 	public String getCustomerUniqueIdType() {
 		return customerUniqueIdType;
 	}
-
 	public void setCustomerUniqueIdType(String customerUniqueIdType) {
 		this.customerUniqueIdType = customerUniqueIdType;
 	}
-
+	public long getCustomerUniqueId() {
+		return customerUniqueId;
+	}
+	public void setCustomerUniqueId(long customerUniqueId) {
+		this.customerUniqueId = customerUniqueId;
+	}
 	public double getInitialBalance() {
 		return initialBalance;
 	}
-
 	public void setInitialBalance(double initialBalance) {
 		this.initialBalance = initialBalance;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public long getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(long mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-	public int getUniqueId() {
-		return uniqueId;
-	}
-
-	public void setUniqueId(int uniqueId) {
-		this.uniqueId = uniqueId;
-	}
+	
 
 }
