@@ -107,6 +107,7 @@
 							System.out.println("Initial balance: "+report.getInitialBalance());
 							System.out.println("Deposited ammount: "+report.getDeposit());
 							System.out.println("Withdraw ammount: "+report.getWithdrawal());
+							System.out.println("Total balance: "+report.getTotalBalance());
 						}else if(selection3==2) {
 							//view all records
 							AccountInfoBalanceReportDao accInfBalRepo= new AccountInfoBalanceReportDaoImpl();
@@ -117,6 +118,7 @@
 								System.out.println("Initial balance: "+u.getInitialBalance());
 								System.out.println("Deposited ammount: "+u.getDeposit());
 								System.out.println("Withdraw ammount: "+u.getWithdrawal());
+								System.out.println("Total balance: "+u.getTotalBalance());
 								System.out.println("==============");
 						}
 							}
@@ -127,7 +129,7 @@
 						int selection4=input.nextInt();
 						if(selection4==1) {
 							//deposit balance
-							DepositBalance();
+							depositBalance();
 							System.out.println("Success!!");
 							System.out.println("Amount has been deposited!!!");
 						}else if (selection4==2) {
@@ -242,13 +244,13 @@
 			accBalServ.withdrawalBalance(customerId,amount);
 			sc.close();
 		}
-		public static void DepositBalance() {
+		public static void depositBalance() {
+			AccontBalanceService accBalServ = new AccontBalanceServiceImpl();
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter Customer ID Number: ");
 			int customerId=sc.nextInt();
 			System.out.println("Enter balnace to be deposit: ");
 			double amount = sc.nextDouble();
-			AccontBalanceService accBalServ = new AccontBalanceServiceImpl();
 			accBalServ.depositBalance(customerId, amount);
 			sc.close();
 		}

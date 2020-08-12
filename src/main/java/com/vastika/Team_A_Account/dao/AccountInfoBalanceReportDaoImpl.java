@@ -18,17 +18,19 @@ public class AccountInfoBalanceReportDaoImpl implements AccountInfoBalanceReport
 		AccountInfoBalanceReport infoReport=new AccountInfoBalanceReport();
 		try(
 				Connection con=DBUtil.getConnection();
-				PreparedStatement ps=con.prepareStatement(QueryUtil.GET_BY_ID_SQL_BALANCE);
+				PreparedStatement ps=con.prepareStatement(QueryUtil.LIST_CUSTOMER_RECORD_SQL_BY_ID);
 				
 				){
-			ps.setLong(1,customerId);
+			//ps.setLong(1,customerId);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
 				infoReport.setCustomerAccountNum(rs.getLong("customer_id"));
-				infoReport.setCustomerName(rs.getString("Customer_name"));
+				infoReport.setCustomerName(rs.getString("customer_name"));
+				infoReport.setInitialBalance(rs.getDouble("initial_balance"));
 				infoReport.setDeposit(rs.getDouble("deposit_amount"));
-				infoReport.setInitialBalance(rs.getDouble("account_balance"));
 				infoReport.setWithdrawal(rs.getDouble("withdraw_amount"));
+				infoReport.setInitialBalance(rs.getDouble("account_balance"));
+				
 				
 				
 			}
@@ -54,10 +56,12 @@ public class AccountInfoBalanceReportDaoImpl implements AccountInfoBalanceReport
 			while(rs.next()) {
 				AccountInfoBalanceReport infoReport=new AccountInfoBalanceReport();
 				infoReport.setCustomerAccountNum(rs.getLong("customer_id"));
-				infoReport.setCustomerName(rs.getString("Customer_name"));
+				infoReport.setCustomerName(rs.getString("customer_name"));
+				infoReport.setInitialBalance(rs.getDouble("initial_balance"));
 				infoReport.setDeposit(rs.getDouble("deposit_amount"));
-				infoReport.setInitialBalance(rs.getDouble("account_balance"));
 				infoReport.setWithdrawal(rs.getDouble("withdraw_amount"));
+				infoReport.setInitialBalance(rs.getDouble("account_balance"));
+				
 				
 				report.add(infoReport);
 				
@@ -69,6 +73,12 @@ public class AccountInfoBalanceReportDaoImpl implements AccountInfoBalanceReport
 		}
 			
 		return report;
+	}
+
+	@Override
+	public double calculateTotalBalance(double initial, double deposite, double withdraw) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

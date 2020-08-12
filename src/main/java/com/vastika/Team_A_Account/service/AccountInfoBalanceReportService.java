@@ -9,4 +9,5 @@ public interface AccountInfoBalanceReportService {
 	AccountInfoBalanceReport displayById(int customerID);
 	 
 	 List<AccountInfoBalanceReport>displayAll();
+	 double calculateTotalBalance(double initial,double deposite, double withdraw );
 }

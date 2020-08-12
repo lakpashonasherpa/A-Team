@@ -3,12 +3,10 @@ package com.vastika.Team_A_Account.model;
 public class AccountInfoBalanceReport {
 	private long customerAccountNum;
 	private String customerName;
-	//private String customerAddress;
 	private double initialBalance;
-
 	private double deposit; 
 	private double withdrawal;
-
+	private double totalBalance;
 	public double getWithdrawal() {
 		return withdrawal;
 	}
@@ -47,5 +45,13 @@ public class AccountInfoBalanceReport {
 
 	public void setDeposit(double deposit) {
 		this.deposit = deposit;
+	}
+
+	public double getTotalBalance() {
+		return totalBalance;
+	}
+
+	public void setTotalBalance(double totalBalance) {
+		this.totalBalance = totalBalance;
 	}
 }

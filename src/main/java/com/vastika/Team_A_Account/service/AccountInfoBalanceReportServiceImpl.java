@@ -20,4 +20,10 @@ public class AccountInfoBalanceReportServiceImpl implements AccountInfoBalanceRe
 		return report.displayAll();
 	}
 
+	@Override
+	public double calculateTotalBalance(double initial, double deposite, double withdraw) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

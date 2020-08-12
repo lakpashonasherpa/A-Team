@@ -6,6 +6,8 @@ public class AccountBalance {
 	private double deposit;
 	private double withdrawal;
 	private double customerId;
+	private double totalBalance;
+	
 	public long getTransactionId() {
 		return transactionId;
 	}
@@ -36,5 +38,11 @@ public class AccountBalance {
 	public void setCustomerId(double customerId) {
 		this.customerId = customerId;
 	}
-
+	public double getTotalBalance() {
+		return totalBalance;
+	}
+	public void setTotalBalance(double totalBalance) {
+		this.totalBalance = totalBalance;
+	}
+	
 }

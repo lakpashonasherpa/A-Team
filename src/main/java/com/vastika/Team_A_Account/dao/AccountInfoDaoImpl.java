@@ -116,11 +116,10 @@ public class AccountInfoDaoImpl implements AccountInfoDao {
 				PreparedStatement ps = con.prepareStatement(QueryUtil.LIST_SQL_CUSTOMER);) {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				customer.setCustomerAccountNum(rs.getInt("account_id"));
+				customer.setCustomerAccountNum(rs.getInt("customer_id"));
 				customer.setCustomerName(rs.getString("customer_name"));
 				customer.setCustomerAddress(rs.getString("customer_address"));
 				customer.setCustomerPhoneNumber(rs.getLong("customer_mobileNum"));
-				customer.setCustomerUniqueId(rs.getInt("customer_unique_id"));
 				customer.setCustomerUniqueIdType(rs.getString("customer_unique_idType"));
 				customer.setCustomerUniqueId(rs.getInt("customer_unique_id_number"));
 				customer.setInitialBalance(rs.getDouble("inititalBalance"));
